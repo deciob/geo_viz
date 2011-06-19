@@ -1,0 +1,31 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "Code": "GH", "Country": "Ghana", "Long": -1.031576, "Lat": 8.100366, "PEOPLE": 23832495.000000, "zoom": 1.000000, "area": 244227919340.246002, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ -1.031576, 8.100366 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "LR", "Country": "Liberia", "Long": -9.425404, "Lat": 6.344303, "PEOPLE": 3441790.000000, "zoom": 2.000000, "area": 98520556979.790253, "priority": 7 }, "geometry": { "type": "Point", "coordinates": [ -9.425404, 6.344303 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "CI", "Country": "Côte d'Ivoire", "Long": -5.545394, "Lat": 7.767781, "PEOPLE": 20617068.000000, "zoom": 1.000000, "area": 330857093442.896973, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ -5.545394, 7.767781 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "NG", "Country": "Nigeria", "Long": 7.690133, "Lat": 9.458086, "PEOPLE": 149229090.000000, "zoom": 1.000000, "area": 907766706218.442749, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ 7.690133, 9.458086 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "CF", "Country": "Central African Republic", "Long": 20.321733, "Lat": 6.592458, "PEOPLE": 4511488.000000, "zoom": 1.000000, "area": 623839127754.729370, "priority": 7 }, "geometry": { "type": "Point", "coordinates": [ 20.321733, 6.592458 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "CM", "Country": "Cameroon", "Long": 12.022101, "Lat": 4.878834, "PEOPLE": 18879301.000000, "zoom": 1.000000, "area": 461804234322.407715, "priority": 7 }, "geometry": { "type": "Point", "coordinates": [ 12.022101, 4.878834 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "MY", "Country": "Malaysia", "Long": 113.350808, "Lat": 2.442171, "PEOPLE": 25715819.000000, "zoom": 1.000000, "area": 339342971705.687195, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ 113.350808, 2.442171 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "GQ", "Country": "Equatorial Guinea", "Long": 10.337738, "Lat": 1.585629, "PEOPLE": 633441.000000, "zoom": 2.000000, "area": 27211557077.424843, "priority": 6 }, "geometry": { "type": "Point", "coordinates": [ 10.337738, 1.585629 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "GA", "Country": "Gabon", "Long": 11.723553, "Lat": -0.637704, "PEOPLE": 1514993.000000, "zoom": 1.000000, "area": 270380510265.858032, "priority": 7 }, "geometry": { "type": "Point", "coordinates": [ 11.723553, -0.637704 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "CG", "Country": "Congo", "Long": 15.866009, "Lat": -0.865656, "PEOPLE": 68692542.000000, "zoom": 1.000000, "area": 340816859372.106384, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ 15.866009, -0.865656 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "CD", "Country": "DR Congo", "Long": 22.466336, "Lat": -2.552264, "PEOPLE": 4012809.000000, "zoom": 1.000000, "area": 2331060957407.567871, "priority": 7 }, "geometry": { "type": "Point", "coordinates": [ 22.466336, -2.552264 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "ID", "Country": "Indonesia", "Long": 113.914200, "Lat": -0.992572, "PEOPLE": 240271522.000000, "zoom": 1.000000, "area": 1825260378534.760254, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ 113.914200, -0.992572 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "BR", "Country": "Brazil", "Long": -50.718755, "Lat": -10.669624, "PEOPLE": 198739269.000000, "zoom": 1.000000, "area": 8531396627421.039062, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ -50.718755, -10.669624 ] } }
+
+]
+}

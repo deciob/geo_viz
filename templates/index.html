@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+<body>
+
+    <div class='list'>
+        <a href='../peters_focus'>
+            <img src='/media/images/focus.png' />
+        </a>
+        <h4><a href='../peters_focus'>Highlight and zoom-to-country-bbox example</a></h4>
+
+        <p>Click on a country to zoom to its bounding box, click again to to go back to the world view.
+            Works in Firefox and Chrome</p>
+    </div>
+
+    <div class='list'>
+        <a href='../peters_flows'>
+            <img src='/media/images/flow.png' />
+        </a>
+        <h4><a href='../peters_flows'>Flow map example</a></h4>
+
+        <p>Hover on the countries list to highlight the flows. Only works in Chrome</p>
+    </div>
+
+
+    {#<h3><a href="../peters_focus">Highlight features example</a></h3>#}
+    {#<h3><a href="../peters_flows">Flow map example</a></h3>#}
+</body>
+{% endblock %}
+
+</html>

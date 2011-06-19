@@ -1,0 +1,14 @@
+application: geo-viz
+version: 5-test
+runtime: python
+api_version: 1
+
+handlers:
+- url: /media/
+  static_dir: media/
+
+- url: /data/
+  static_dir: data/
+
+- url: .*
+  script: main.py

@@ -1,0 +1,7 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "fid": 8, "SOVISO": "EU" }, "geometry": { "type": "Point", "coordinates": [ 12.434421, 51.613314 ] } }
+
+]
+}

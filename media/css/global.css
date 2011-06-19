@@ -1,0 +1,83 @@
+body {
+  font: Helvetica Neue;
+}
+
+#map {
+  margin-top: 10px;
+}
+
+.bordered {
+  border: solid 2px #525b63;
+  background: #ffffff;
+}
+
+line {
+  stroke: #525b63;
+  stroke-dasharray: 4,2;
+}
+
+#states path {
+  fill: #AFBDCC;
+  stroke: #fff;
+}
+
+#madagascar_importers path {
+  fill: #AFBDCC;
+  stroke: #1d7b5a;
+}
+
+div {
+  width: 960px;
+}
+
+.exporters {
+    /*fill-opacity: 0.5;
+    stroke-opacity: 0.7;*/
+    fill: #494277;
+    /*stroke: #494277;*/
+    stroke-width: 0.5px;
+}
+
+#expo_list {
+    position: absolute;
+    /*top: 270px;*/
+    left: 30px;
+    width: 250px;
+    /*font-size: 12px;
+    line-height: 2em;*/
+}
+
+#expo_list ul {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+h3 {
+    font-size: 0.9em;
+}
+
+.description {
+    font-size: 10px;
+}
+
+img {
+    border: 2px solid #CCCCCC;
+    display: inline;
+    height: 180px;
+    margin-bottom: 8px;
+    margin-right: 10px;
+    width: 226px;
+}
+
+.list {
+    clear: left;
+}
+
+.list img {
+    float: left;
+}
+
+a {
+    color: steelblue;
+    text-decoration: none;
+}

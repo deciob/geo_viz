@@ -1,0 +1,21 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "Code": "NL", "Country": "Netherlands", "Long": 5.363161, "Lat": 52.178116, "PEOPLE": 16715999.000000, "zoom": 2.000000, "area": 39822970922.713913, "priority": 7 }, "geometry": { "type": "Point", "coordinates": [ 5.363161, 52.178116 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "BE", "Country": "Belgium", "Long": 4.650246, "Lat": 50.656897, "PEOPLE": 10414336.000000, "zoom": 2.000000, "area": 29986030630.763752, "priority": 7 }, "geometry": { "type": "Point", "coordinates": [ 4.650246, 50.656897 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "GB", "Country": "United Kingdom", "Long": -1.449462, "Lat": 53.142645, "PEOPLE": 61113205.000000, "zoom": 1.000000, "area": 248658635064.133545, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ -1.449462, 53.142645 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "DE", "Country": "Germany", "Long": 10.564460, "Lat": 51.072772, "PEOPLE": 82329758.000000, "zoom": 1.000000, "area": 355735856134.500671, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ 10.564460, 51.072772 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "IT", "Country": "Italy", "Long": 12.574767, "Lat": 42.790379, "PEOPLE": 58126212.000000, "zoom": 1.000000, "area": 314225521175.519470, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ 12.574767, 42.790379 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "PT", "Country": "Portugal", "Long": -8.244391, "Lat": 39.577946, "PEOPLE": 10707924.000000, "zoom": 2.000000, "area": 93213656746.702072, "priority": 7 }, "geometry": { "type": "Point", "coordinates": [ -8.244391, 39.577946 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "ES", "Country": "Spain", "Long": -3.174505, "Lat": 40.359929, "PEOPLE": 40525002.000000, "zoom": 1.000000, "area": 501177851100.731262, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ -3.174505, 40.359929 ] } }
+,
+{ "type": "Feature", "properties": { "Code": "FR", "Country": "France", "Long": 2.526276, "Lat": 46.652744, "PEOPLE": 64057792.000000, "zoom": 1.000000, "area": 643139683121.839233, "priority": 8 }, "geometry": { "type": "Point", "coordinates": [ 2.526276, 46.652744 ] } }
+
+]
+}
