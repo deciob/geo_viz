@@ -1,18 +1,16 @@
-$(document).ready(function(){
+document.addEventListener("DOMContentLoaded", main, false);
 
-    var map_width = 960,
-        map_height = 500,
-        norm_scale = 0.36 * map_height,
-        current_scale = norm_scale,
-        highlight_colour = '#D94141';
+function main () {  
 
-    var xy = d3.geo.peters(map_height),
+    var conf = new PetersConf(true);
+    
+    var xy = d3.geo.peters(conf.map_height),
         path = d3.geo.path().projection(xy);
 
     var states = d3.select("body")
         .append("svg:svg")
-        .style("width", map_width + "px")
-        .style("height", map_height + "px")
+        .style("width", conf.map_width + "px")
+        .style("height", conf.map_height + "px")
         .attr("id", "map")
         .attr("class", "bordered")
         .append("svg:g")
@@ -26,7 +24,7 @@ $(document).ready(function(){
         .attr("y2", xy([0, 0])[1]);
 
     /*
-    highligth_feature(highlight_colour) and highligth_feature('#AFBDCC')
+    highligth_feature(conf.highlight_colour) and highligth_feature('#AFBDCC')
     are closure examples.
     These functions are called immediatley and return new functions. They share
     the same function body definition, but store different environments.
@@ -35,14 +33,14 @@ $(document).ready(function(){
     as: listener.call(this, d, i); (see d3.js line 1560)
      */
 
-    d3.json("/media/js/d3/data/110m_countries.json", function(collection) {
+    d3.json("/media/data/110m_countries.json", function(collection) {
         states
             .selectAll("path")
             .data(collection.features)
             .enter().append("svg:path")
-            .on("mouseover", highligth_feature(highlight_colour))
-            .on("mouseout", highligth_feature('#AFBDCC'))
-            .on('click', focus(180))
+            .on("mouseover", highligth_feature(conf.highlight_colour))
+            .on("mouseout", highligth_feature(conf.norm_colour))
+            .on('click', focus())
             .attr("d", path)
             .append("svg:title")
             .text(function(d) {
@@ -55,7 +53,7 @@ $(document).ready(function(){
             var centroid = path.centroid(feature),
             x = centroid[0],
             y = centroid[1];
-            if (norm_scale === current_scale) {
+            if (conf.norm_scale === conf.current_scale) {
                 d3.select(this)
                 .transition()
                 .style("fill", opacity);
@@ -63,37 +61,40 @@ $(document).ready(function(){
         };
     }
 
-    function focus(scale_value) {
+    var prev_selected_feature_i = -1;
+    function focus() {
         return function(feature, i) {
+            
             var centroid = path.centroid(feature),
             x = centroid[0],
             y = centroid[1],
             tx, ty,
-            x_factor = map_width / 2,
-            y_factor = map_height / 2,
+            x_factor = conf.map_width / 2,
+            y_factor = conf.map_height / 2,
             zoom_factor = zoom_factor_from_feature_bbox(feature);
-            if (norm_scale !== current_scale) {
-                xy.scale(norm_scale)
+            if (conf.norm_scale !== conf.current_scale) {
+                xy.scale(conf.norm_scale)
                     .translate([x_factor, y_factor])
                 refresh();
-                current_scale = norm_scale;
+                conf.current_scale = conf.norm_scale;
             } else {
-                if (x < map_width / 2) {
+                if (x < conf.map_width / 2) {
                     tx = (x_factor * zoom_factor +(x_factor - x * zoom_factor));
                 } else {
                     tx = (x_factor * zoom_factor -(x * zoom_factor - x_factor));
                 }
-                if (y < map_height / 2) {
+                if (y < conf.map_height / 2) {
                     ty = (y_factor * zoom_factor +(y_factor - y * zoom_factor));
                 } else {
                     ty = (y_factor * zoom_factor -(y * zoom_factor - y_factor));
                 }
-                xy.scale(norm_scale * zoom_factor)
+                xy.scale(conf.norm_scale * zoom_factor)
                     .translate([tx, ty]);
                 refresh();
-                current_scale = norm_scale * zoom_factor;
+                conf.current_scale = conf.norm_scale * zoom_factor;
             }
-        }
+            prev_selected_feature_i = i;
+        };
     }
 
 
@@ -113,7 +114,7 @@ $(document).ready(function(){
         } else if (bbox[0][0] < 0 && bbox[1][0] > 0) {
             geo_width = Math.abs(bbox[0][0]) + bbox[1][0];
         }
-        width = map_width * geo_width / 360;
+        width = conf.map_width * geo_width / 360;
         // height
         if (bbox[0][1] < 0 && bbox[1][1] < 0){
             geo_height = Math.abs(bbox[0][1]) - Math.abs(bbox[1][1]);
@@ -122,12 +123,12 @@ $(document).ready(function(){
         } else if (bbox[0][1] < 0 && bbox[1][1] > 0) {
             geo_height = Math.abs(bbox[0][1]) + bbox[1][1];
         }
-        height = map_height * geo_height / 180;
+        height = conf.map_height * geo_height / 180;
 
         if (width > height) {
-            return Math.max(Math.round(Math.sqrt(map_width/geo_width)) - 1, 1);
+            return Math.max(Math.round(Math.sqrt(conf.map_width/geo_width)) - 1, 1);
         } else {
-            return Math.max(Math.round(Math.sqrt(map_height/geo_height)) - 1, 1);
+            return Math.max(Math.round(Math.sqrt(conf.map_height/geo_height)) - 1, 1);
         }        
     }
 
@@ -186,4 +187,4 @@ $(document).ready(function(){
 //        }
 //    });
 
-});
+}
