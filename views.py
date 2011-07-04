@@ -31,3 +31,16 @@ class PathTest(webapp.RequestHandler):
         template_values = {}
         path = os.path.join(os.path.dirname(__file__), 'templates/path_test.html')
         self.response.out.write(template.render(path, template_values))
+        
+
+class CVTest(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'templates/cv.html')
+        self.response.out.write(template.render(path, template_values))
+        
+class Choropleth(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'templates/choropleth.html')
+        self.response.out.write(template.render(path, template_values))

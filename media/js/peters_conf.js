@@ -7,6 +7,7 @@ function PetersConf ( full_screen ) {
     this.current_scale = this.norm_scale,
     
     this.norm_colour = '#AFBDCC',
-    this.highlight_colour = '#D94141';
+    this.highlight_colour = '#D94141',
+    this.norm_stroke = '#ffffff';
     
 }

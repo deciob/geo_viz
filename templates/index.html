@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+
+{% block custom_css %}
+<link rel="stylesheet" type="text/css" href="/media/css/home.css" />
+{% endblock %}
+
 {% block body %}
 <body>
 
@@ -9,8 +14,17 @@
         </a>
         <h4><a href='../peters_focus'>Highlight and zoom-to-country-bbox example</a></h4>
 
-        <p>Click on a country to zoom to its bounding box, click again to to go back to the world view.
-            Works in Firefox and Chrome</p>
+        <p>Click on a country to zoom to its bounding box. Clicking twice on the same country brings you back to the world view.
+            Only works in Firefox and Chrome</p>
+    </div>
+    
+    <div class='list'>
+        <a href='../choropleth'>
+            <img src='/media/images/choropleth.png' />
+        </a>
+        <h4><a href='../choropleth'>Choropleth map example</a></h4>
+
+        <p>Hover on the countries list to highlight the values</p>
     </div>
 
     <div class='list'>
@@ -19,7 +33,7 @@
         </a>
         <h4><a href='../peters_flows'>Flow map example</a></h4>
 
-        <p>Hover on the countries list to highlight the flows. Only works in Chrome</p>
+        <p>Hover on the countries list to highlight the flows. Only works in Chrome, slow in Firefox</p>
     </div>
 
 

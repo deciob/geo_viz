@@ -229,7 +229,7 @@ $(document).ready(function(){
 
     var peters = d3.geo.peters(),
     // setting pointRadius to 0.01 instead of 0, because of Firefox4 behaviour.
-    path = d3.geo.path().projection(peters).pointRadius(5);//(set_point_radius);
+    path = d3.geo.path().projection(peters).pointRadius(0.01);//(set_point_radius);
     
     var base_map = d3.select("body")
         .append("svg:svg")
@@ -261,19 +261,212 @@ $(document).ready(function(){
         .append("ul");
 
 
-    
+    // ***** country polygons ******
+    d3.json("/data/110m_countries.json", function(collection) {
+        states
+        .selectAll("path")
+        .data(collection.features)
+        .enter()
+        .append("svg:path")
+        .attr("opacity", 0.7)
+        //.on("mouseover", highligth_feature(highlight_colour))
+        //.on("mouseout", highligth_feature('#AFBDCC'))
+        //.on('click', focus(180))
+        .attr("id", function(d) {
+            return 'poly_' + d.properties.id;
+        })
+        .attr("class", "country_paths")
+        .attr("d", path)
+        .append("svg:title")
+        .text(function(d) {
+            return d.properties.name;
+        });
+        //        equator
+        //        .attr("y1", peters([0, 0])[1])
+        //        .attr("y2", peters([0, 0])[1]);
+    });
+
+
+    // ***** flows ******
+
+    var highligth_exports = function (params) {
+
+        return function() {
+            //TODO: why all this stuff needs to live inside the return statement?
+
+            var focus_codes = [];
+            if (params.features && focus_codes.length === 0) {
+                focus_codes.push('poly_' + params.features.properties.Code);
+                $.each(params.features.properties.export_values, function (code, val) {
+                    focus_codes.push('poly_' + code);                    
+                });
+            }
+            
+            var set_country_opacity = function (obj, i) {
+                var el = d3.select(this);
+                if ($.inArray(el.attr("id"), focus_codes) === -1) {
+                    el.transition()
+                      .attr("opacity", 0.4);
+                } else {
+                    el.transition()
+                      .attr("opacity", 1);
+                }
+            };
+
+            // too slow!!! could be useful in firefox though!
+//            var handle_transition = function (d, exporter) {
+//                for (var i = 0; i < d[0].length; i++) {
+//                    var sel = d3.select(d[0][i]);
+//                    var sel_id = sel.attr('id');
+//                    var importer_id = sel_id.slice(2);
+//
+//                    if (!params.out) {
+////                        d3.selectAll(".country_paths")
+////                            .attr("opacity", 0.2);
+//                        d3.select('#poly'+importer_id)
+//                            .attr("opacity", 1);
+//                    } else if (params.out) {
+//                        sel.transition()
+//                            .attr("stroke-opacity", 0.2);
+//                        d3.selectAll(".country_paths")
+//                            .attr("opacity", 0.4);
+//                    }
+//
+//                    if (!params.out &&
+//                            sel_id.indexOf(params.exporter_code) !== -1) {
+//                        sel.transition()
+//                            .attr("stroke-opacity", params.flow_opacity_focus)
+//                            .attr("stroke", params.flow_stroke_focus);
+//                    } else if (!params.out &&
+//                            sel_id.indexOf(params.exporter_code) === -1) {
+//                        sel.transition()
+//                            .attr("stroke-opacity", params.flow_opacity_other)
+//                            .attr("stroke", params.flow_stroke_other);
+//                    }
+//                }
+//            };
+           
+            d3.select(this)
+                .transition()
+                .style("font-size", params.font_size + 'px')
+                .style("color", params.flow_stroke);
+            d3.selectAll(".connections_group_all")
+                //.call(handle_transition, params.exporter_code);
+                .transition()
+                .attr("stroke-opacity", params.flow_opacity_other)
+                .attr("stroke", params.flow_stroke_other);
+            d3.selectAll(".connections_group_" + params.exporter_code)
+                .transition()
+                .attr("stroke-opacity", params.flow_opacity_focus)
+                .attr("stroke", params.flow_stroke_focus);
+            if (params.out) {
+                d3.selectAll(".country_paths")
+                    .transition()
+                    .attr("opacity", 0.7);
+            } else {
+                d3.selectAll(".country_paths")
+                    .each(set_country_opacity);
+            }
+            
+        }
+    };
+
+    var draw_lines = function (d, i) {        
+        var periphery_pixels = [];
+        var flow_data = [];
+        var exporter_code = d.properties.Code;
+        var exporter_name = d.properties.Country;
+        var adjust = 0;//(data.properties.export_values['EU'] * 13);
+        var centre_pixels = [this.getBBox().x + adjust, this.getBBox().y + adjust];
+
+        var style_lines = function (d, i) {
+            d3.select(this)
+                .attr("stroke-width", flow_data[i].data * 3)
+                .attr("id", exporter_code + '_' + flow_data[i].id);
+        };
+
+        var set_importers = function (d, i) {
+            periphery_pixels.push([this.getBBox().x, this.getBBox().y]);
+        }
+
+        $.each(d.properties.export_values, function (country, value) {
+            flow_data.push({'data': value, 'id': country});
+            d3.select('#'+country)
+                .each(set_importers);
+        });
+
+        var get_data = function () {
+            var data = [];
+            $.each(periphery_pixels, function(i, pixels) {
+                var line = [centre_pixels, pixels];
+                data.push(line);
+            });
+            return data;
+        };
+
+        var connections = base_map
+            .append("svg:g")
+            .attr("id", "connections_" + exporter_code);
+
+        var data = get_data();
+        add_outer_middle_point(data);
+
+        connections
+            .selectAll("path")
+            .data(data)
+            .enter().append("svg:path")
+            .attr("class", "connections_group_all connections_group_" + exporter_code)
+            .attr("d", getLine())
+            .attr("fill", "none")
+            .attr("stroke", "#1a6f51")
+            .attr("stroke-opacity", 0.2)
+            .each(style_lines);
+
+        var mouse_in = {
+            'out': false,
+            'features': d,
+            'font_size': 14,
+            'flow_opacity_focus': 0.8,
+            'flow_opacity_other': 0,
+            'flow_stroke_focus': '#1a6f51', //'#ff6f09',
+            'flow_stroke_other': '#1a6f51',
+            'exporter_code': exporter_code,
+            'country_opacity_focus': 1,
+            'country_opacity_other': 0.2
+        };
+
+        var mouse_out = {
+            'out': true,
+            'features': d,
+            'font_size': 8,
+            'flow_opacity_focus': 0.2,
+            'flow_opacity_other': 0.2,
+            'flow_stroke_focus': '#1a6f51',
+            'flow_stroke_other': '#1a6f51',
+            'exporter_code': exporter_code,
+            'country_opacity_focus': 0.6,
+            'country_opacity_other': 0.6
+        };
+
+        expo_list
+            .append("li")
+            .text(exporter_name)
+            .attr('id', 'expo_list_' + exporter_code)
+            .on("mouseover", highligth_exports(mouse_in))
+            .on("mouseout", highligth_exports(mouse_out));
+    };
 
     // loading importers point features
     var importers_wrapper = base_map
         .append("svg:g")
         .attr("id", "importers");
-    d3.json("/data/eu_centroid.json", function(importers) {
+    d3.json("/data/importers.json", function(importers) {
         importers_wrapper
         .selectAll("path")
         .data(importers.features)
         .enter().append("svg:path")
         .attr("id", function(d) {
-            return d.properties['SOVISO'];
+            return d.properties['Code'];
             })
         .attr("class", "importers")
         .attr("d", path);
@@ -283,7 +476,7 @@ $(document).ready(function(){
     var exporters_wrapper = base_map
         .append("svg:g")
         .attr("id", "exporters");
-    d3.json("/data/eu_imports_data2.json", function(exporters) {
+    d3.json("/data/exporters_data.json", function(exporters) {
         //console.log(exporters)
         exporters_wrapper
         .selectAll("path")
@@ -291,11 +484,12 @@ $(document).ready(function(){
         .enter()
         .append("svg:path")
         .attr("id", function(d) {
-            return d.properties['ISO_A2'];
+            return d.properties['Code'];
             })
         .attr("class", "exporters")
         .attr("d", path)
-        .call(viz_cluster.cluster_points);
+        .each(draw_lines);
+        //.call(viz_cluster.cluster_points);
     });
 
 //    d3.selectAll(".exporters")

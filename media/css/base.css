@@ -1,0 +1,16 @@
+body {
+  font: Helvetica Neue;
+}
+
+a {
+    color: steelblue;
+    text-decoration: none;
+}
+
+h3 {
+    font-size: 0.9em;
+}
+
+.description {
+    font-size: 10px;
+}

@@ -31,6 +31,8 @@ def main():
         ('/peters_focus', views.PetersFocus),
         ('/peters_flows', views.PetersFlows),
         ('/path_test', views.PathTest),
+        ('/choropleth', views.Choropleth),
+        ('/cv', views.CVTest)
         ],
         debug=True)
     util.run_wsgi_app(application)

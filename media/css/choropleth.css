@@ -3,10 +3,10 @@
   margin-top: 10px;
 }
 
-.bordered {
-  border: solid 2px #525b63;
-  background: #ffffff;
-}
+/*#global_wrapper {
+  border: solid 2px;
+  /*background: #ffffff;
+}*/
 
 line {
   stroke: #525b63;
@@ -14,13 +14,13 @@ line {
 }
 
 #states path  {
-  fill: #AFBDCC;
-  stroke: #fff;
+  /*fill: #AFBDCC;*/
+  stroke: #D9D9D9;
 }
 
 #state path {
   fill-opacity: 0;
-  stroke: #fff;
+  /*stroke: #fff;*/
 }
 
 #madagascar_importers path {
@@ -52,4 +52,18 @@ div {
 #expo_list ul {
     list-style-type: none;
     cursor: pointer;
+}
+
+.list {
+    clear: left;
+}
+
+.list img {
+    float: left;
+}
+
+#results_box {
+    fill: none;
+    stroke: #525b63;
+    stroke-width: 2;
 }
