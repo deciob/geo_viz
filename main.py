@@ -32,6 +32,7 @@ def main():
         ('/peters_flows', views.PetersFlows),
         ('/path_test', views.PathTest),
         ('/choropleth', views.Choropleth),
+        ('/choropleth_layout', views.ChoroplethLayout),
         ('/cv', views.CVTest)
         ],
         debug=True)

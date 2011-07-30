@@ -44,3 +44,9 @@ class Choropleth(webapp.RequestHandler):
         template_values = {}
         path = os.path.join(os.path.dirname(__file__), 'templates/choropleth.html')
         self.response.out.write(template.render(path, template_values))
+        
+class ChoroplethLayout(webapp.RequestHandler):
+    def get(self):
+        template_values = {}
+        path = os.path.join(os.path.dirname(__file__), 'templates/choropleth_layout.html')
+        self.response.out.write(template.render(path, template_values))

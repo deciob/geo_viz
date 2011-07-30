@@ -8,14 +8,14 @@ function main () {
     var xy = d3.geo.peters(conf.map_height),
     path = d3.geo.path().projection(xy);
     
-    var svg_wrapper = d3.select("body")
+    var svg_wrapper = d3.select("#map_container")
     .append("svg:svg")
     .attr("id", "global_wrapper")
     .style("width", conf.map_width + "px")
-    .style("height", conf.map_height + "px")
-    .style("border-style", 'solid')
-    .style("border-width", 2)
-    .style("border-color", conf.border_color);
+    .style("height", conf.map_height + "px");
+    //.style("border-style", 'solid')
+    //.style("border-width", 2)
+    //.style("border-color", conf.border_color);
 
     var states = svg_wrapper
     .append("svg:g")
